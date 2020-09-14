@@ -8,9 +8,9 @@
       </div>
       <button class="bg-primary btn">立即下载</button>
     </div>
-    <div class="nav bg-primary pt-3 pb-1 d-flex jc-around">
-      <div class="nav-item text-white fs-sm">
-        <router-link to="/home" tag="div" class="active pb-1">首页</router-link>
+    <div class="nav bg-primary pt-3 pb-1 nav-inverse jc-around">
+      <div class="nav-item text-white fs-sm active">
+        <router-link to="/home" tag="div" class="pb-1">首页</router-link>
       </div>
       <div class="nav-item text-white fs-sm">
         <router-link to="/abort" tag="div">攻略中心</router-link>
@@ -29,3 +29,10 @@ export default {
   components: {},
 };
 </script>
+<style lang="scss">
+.tab-bar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+</style>

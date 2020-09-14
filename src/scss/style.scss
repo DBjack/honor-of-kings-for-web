@@ -1,4 +1,5 @@
 @import "./variables";
+@import "../assets/iconfont/iconfont.css";
 * {
     // 如果宽度过多，内容向内挤压
     box-sizing: border-box;
@@ -133,10 +134,23 @@ $type in $spacing-types {
     padding: 0.2rem 0.5rem;
 }
 
-.nav .nav-item {
-    border-bottom: 3px solid transparent;
-    & .active {
-        border-bottom: 3px solid #fff;
+.nav {
+    display: flex;
+    .nav-item {
+        border-bottom: 3px solid transparent;
+        color: map-get($colors, "primary");
+        padding-bottom: 0.3rem;
+        &.active {
+            border-bottom: 3px solid map-get($colors, "primary");
+        }
+    }
+    &.nav-inverse {
+        .nav-item {
+            color: white;
+            &.active {
+                border-bottom: 3px solid white;
+            }
+        }
     }
 }
 

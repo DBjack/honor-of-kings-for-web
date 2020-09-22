@@ -53,7 +53,7 @@
           <span class="text-grey">[{{ news.categoryName }}]</span>
           <span class="mx-2">|</span>
           <span class="flex-1 text-left text-black">{{ news.title }}</span>
-          <span>{{ news.date }}</span>
+          <span>{{ news.updatedAt }}</span>
         </div>
       </template>
     </m-list-card>
@@ -61,6 +61,8 @@
 </template>
 
 <script>
+import { fetchNewsList } from "@/api/article";
+import dayjs from "dayjs";
 const navIcons = [
   {
     title: "爆料站",
@@ -115,51 +117,22 @@ export default {
         // Some Swiper option/callback...
       },
       navIcons,
-      newsCats: [
-        {
-          name: "热门",
-          newsList: new Array(5).fill({}).map((v) => {
-            return (v = {
-              categoryName: "公告",
-              title: "6月2日不停机公告",
-              date: "06/02",
-            });
-          }),
-        },
-        {
-          name: "新闻",
-          newsList: new Array(5).fill({}).map((v) => ({
-            categoryName: "公告",
-            title: "dasfd6月2日不停机公告",
-            date: "06/02",
-          })),
-        },
-        {
-          name: "热门",
-          newsList: new Array(5).fill({}).map((v) => ({
-            categoryName: "公告",
-            title: "6月2日不gasdg停机公告",
-            date: "06/02",
-          })),
-        },
-        {
-          name: "热门",
-          newsList: new Array(5).fill({}).map((v) => ({
-            categoryName: "公告",
-            title: "6月2日不停机公告",
-            date: "06/02",
-          })),
-        },
-        {
-          name: "热门",
-          newsList: new Array(5).fill({}).map((v) => ({
-            categoryName: "公告",
-            title: "6月2日不停机公告",
-            date: "06/02",
-          })),
-        },
-      ],
+      newsCats: [],
     };
+  },
+  created() {
+    this.fetchNewsList();
+  },
+  methods: {
+    async fetchNewsList() {
+      const { data } = await fetchNewsList();
+      this.newsCats = data;
+      this.newsCats.map((v) => {
+        v.newsList.map((news) => {
+          news.updatedAt = dayjs(news.updatedAt).format("MM/DD");
+        });
+      });
+    },
   },
 };
 </script>
